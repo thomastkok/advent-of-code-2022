@@ -35,18 +35,14 @@ def part_two(puzzle, size=4000000):
         left = -distance if sensor[0] - distance >= 0 else -sensor[0]
         right = distance if sensor[0] + distance <= size else size - sensor[0]
         for x in range(left, right + 1, 1):
-            point = (sensor[0] + x, sensor[1] + distance - abs(x))
-            if point[0] >= 0 and point[0] <= size and point[1] >= 0 and point[1] <= size:
+            points = (
+                [(sensor[0] + x, sensor[1] + distance - abs(x)), (sensor[0] + x, sensor[1] + distance - abs(x))]
+                if distance != abs(x)
+                else [(sensor[0] + x, sensor[1] + distance - abs(x))]
+            )
+            for point in points:
                 for s, d in zip(sensors, distances):
                     if abs(point[0] - s[0]) + abs(point[1] - s[1]) < d:
                         break
                 else:
                     return point[0] * size + point[1]
-            if distance != abs(x):
-                point = (sensor[0] + x, sensor[1] - distance + abs(x))
-                if point[0] >= 0 and point[0] <= size and point[1] >= 0 and point[1] <= size:
-                    for s, d in zip(sensors, distances):
-                        if abs(point[0] - s[0]) + abs(point[1] - s[1]) < d:
-                            break
-                    else:
-                        return point[0] * size + point[1]
