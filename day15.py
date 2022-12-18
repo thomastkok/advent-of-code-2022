@@ -36,7 +36,7 @@ def part_two(puzzle, size=4000000):
         right = distance if sensor[0] + distance <= size else size - sensor[0]
         for x in range(left, right + 1, 1):
             points = (
-                [(sensor[0] + x, sensor[1] + distance - abs(x)), (sensor[0] + x, sensor[1] + distance - abs(x))]
+                [(sensor[0] + x, sensor[1] + distance - abs(x)), (sensor[0] + x, sensor[1] - distance + abs(x))]
                 if distance != abs(x)
                 else [(sensor[0] + x, sensor[1] + distance - abs(x))]
             )
